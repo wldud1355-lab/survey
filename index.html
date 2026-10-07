@@ -44,6 +44,7 @@
   .lead{color:var(--sub);margin-top:8px}
   h3{font-size:15px;font-weight:800;color:var(--navy);margin:26px 0 10px;padding-left:10px;border-left:4px solid var(--yellow)}
   .q{font-size:16px;font-weight:800;margin:24px 0 10px;line-height:1.5}
+  .req{color:var(--orange);font-style:normal;font-weight:800}
   .q small{color:var(--sub);font-weight:600;font-size:14px}
 
   /* ── 도입부: 사진 페이드 레터 ── */
@@ -207,7 +208,7 @@
       <h2>세무사님, 이런 고객이 있으신가요?</h2>
       <p class="lead">아래 항목을 보면서 세무사님의 거래처 중 해당되는 고객을 확인해보세요.</p>
 
-      <h3>가업승계 관련</h3>
+      <h3>가업승계 관련 <em class="req">*</em></h3>
       <div class="opts">
         <label class="opt"><input type="checkbox" name="succession" value="장기간 사업을 운영하고 있는 고객"><span class="mark"></span><span class="txt">장기간 사업을 운영하고 있는 고객</span></label>
         <label class="opt"><input type="checkbox" name="succession" value="자녀에게 사업을 승계할 가능성이 있는 고객"><span class="mark"></span><span class="txt">자녀에게 사업을 승계할 가능성이 있는 고객</span></label>
@@ -217,7 +218,7 @@
         <label class="opt"><input type="checkbox" name="succession" value="개인사업자로 가업을 10년 이상 영위한 고객"><span class="mark"></span><span class="txt">개인사업자로 가업을 10년 이상 영위한 고객</span></label>
       </div>
 
-      <h3>주식이동 · 자본거래 · 자사주 관련</h3>
+      <h3>주식이동 · 자본거래 · 자사주 관련 <em class="req">*</em></h3>
       <div class="opts">
         <label class="opt"><input type="checkbox" name="stock" value="법인이 자기주식을 보유하고 있는 고객"><span class="mark"></span><span class="txt">법인이 자기주식을 보유하고 있는 고객</span></label>
         <label class="opt"><input type="checkbox" name="stock" value="잉여금의 개인화를 고민하고 있는 고객"><span class="mark"></span><span class="txt">잉여금의 개인화를 고민하고 있는 고객</span></label>
@@ -238,7 +239,7 @@
         <p>유사 컨설팅 업체들이 가업승계·자사주 등 컨설팅 가능성이 높은 기업을 대상으로 접근하는 움직임이 나타나고 있습니다.</p>
         <p>외부 업체가 먼저 제안하기 전에 <mark>세무사님이 먼저 고객의 상황을 파악하고 필요한 것을 제안하는 것</mark>이 중요합니다.</p>
       </div>
-      <p class="q">소중한 고객을 지키고 컨설팅 기회를 만들어가기 위해<br>어떤 지원이 필요하신가요? <small>(중복 선택 가능)</small></p>
+      <p class="q">소중한 고객을 지키고 컨설팅 기회를 만들어가기 위해<br>어떤 지원이 필요하신가요? <em class="req">*</em> <small>(중복 선택 가능)</small></p>
       <div class="opts">
         <label class="opt"><input type="checkbox" name="needs" value="고객에게 활용할 수 있는 자료 및 상담 Tool"><span class="mark"></span><span class="txt">고객에게 활용할 수 있는 자료 및 상담 Tool</span></label>
         <label class="opt"><input type="checkbox" name="needs" value="컨설팅 역량 강화를 위한 특별 교육"><span class="mark"></span><span class="txt">컨설팅 역량 강화를 위한 특별 교육</span></label>
@@ -256,7 +257,7 @@
       <p class="pre">고객에게 무엇을, 어떻게 제안해야 할지 고민된다면,</p>
       <h2>기업의별 중앙컨설팅본부(CCD)가<br>함께합니다.</h2>
       <p class="ccd-brief">고객의 상황을 살펴보고 고객을 위한 컨설팅 기회를 발견해, 소중한 고객을 보호하면서 필요한 제안으로 연결할 수 있도록 함께 방향을 찾아드립니다.</p>
-      <p class="q3"><span>Q.</span>CCD와 함께 검토해보시겠습니까?</p>
+      <p class="q3"><span>Q.</span>CCD와 함께 검토해보시겠습니까? <em class="req">*</em></p>
       <div class="yn">
         <label class="opt"><input type="radio" name="consult" value="YES"><span class="mark"></span><span class="txt"><b>네, 함께 논의해보고 싶습니다.</b><small>고객 상황에 맞는 컨설팅 기회와 제안 방법을 함께 검토합니다.</small></span></label>
         <label class="opt"><input type="radio" name="consult" value="NO"><span class="mark"></span><span class="txt"><b>지금은 검토가 필요한 고객이 없습니다.</b><small>필요한 고객이 생기면 언제든 함께 논의할 수 있습니다.</small></span></label>
@@ -304,6 +305,10 @@
     if (cur === 0){
       if (!v('name')) return err('세무사 성함을 입력해 주세요.');
       if (!/^[0-9\-\s]{9,}$/.test(v('phone'))) return err('연락처를 정확히 입력해 주세요.');
+    }
+    if (cur === 1){
+      if (!vals('succession').length) return err('가업승계 관련 항목을 1개 이상 선택해 주세요.');
+      if (!vals('stock').length) return err('주식이동 · 자본거래 · 자사주 관련 항목을 1개 이상 선택해 주세요.');
     }
     if (cur === 2){
       const other = document.getElementById('otherChk').checked;
