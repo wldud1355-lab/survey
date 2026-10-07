@@ -405,17 +405,24 @@
       needs: vals('needs'), needsOther: otherChk.checked ? v('needsOther') : '',
       consult: '', memo: '', ref: REF,
     };
+    let finished = false;
+    const finish = () => { if (finished) return; finished = true; show(steps.length - 1); };
     const fail = msg => {
-      btn.disabled = false; btn.textContent = '제출하기';
+      if (finished) return;
+      clearTimeout(timer);
+      btn.disabled = false; btn.textContent = '제출 또는 요청하기';
       err(msg || '제출 중 오류가 발생했어요. 잠시 후 다시 시도해 주세요.');
     };
+    // 저장 응답을 오래 기다리지 않도록 1.5초 뒤 완료 화면으로 넘어가요 (전송은 끝까지 진행됨)
+    const timer = setTimeout(finish, 1500);
     fetch(SCRIPT_URL, {
       method: 'POST',
       headers: { 'Content-Type': 'text/plain;charset=utf-8' },
       body: JSON.stringify(data),
+      keepalive: true,
     })
       .then(r => r.json())
-      .then(res => { if (!res.ok) return fail(res.error); show(steps.length - 1); })
+      .then(res => { if (!res.ok) return fail(res.error); finish(); })
       .catch(() => fail());
   };
 </script>
