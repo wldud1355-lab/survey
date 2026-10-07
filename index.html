@@ -345,6 +345,12 @@
       boxes.forEach(o => { if (o !== b && (b.hasAttribute('data-none') || o.hasAttribute('data-none'))) o.checked = false; });
     }));
   });
+  // STEP 3: 선택한 답을 한 번 더 누르면 선택 취소
+  const consultRadios = [...document.querySelectorAll('input[name="consult"]')];
+  consultRadios.forEach(r => r.addEventListener('click', () => {
+    if (r.dataset.was === '1') { r.checked = false; r.dataset.was = ''; }
+    else { consultRadios.forEach(o => o.dataset.was = ''); r.dataset.was = '1'; }
+  }));
   document.getElementById('f').addEventListener('input', () => err(''));
   document.getElementById('f').addEventListener('submit', e => e.preventDefault());
 
