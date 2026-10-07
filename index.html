@@ -44,6 +44,8 @@
   .lead{color:var(--sub);margin-top:8px}
   h3{font-size:15px;font-weight:800;color:var(--navy);margin:26px 0 10px;padding-left:10px;border-left:4px solid var(--yellow)}
   .q{font-size:16px;font-weight:800;margin:24px 0 10px;line-height:1.5}
+  .opt.none{margin-top:4px;border-style:dashed}
+  .opt.none .txt{color:var(--sub)}
   .req{color:var(--orange);font-style:normal;font-weight:800}
   .q small{color:var(--sub);font-weight:600;font-size:14px}
 
@@ -216,6 +218,7 @@
         <label class="opt"><input type="checkbox" name="succession" value="기업가치 또는 법인 자산이 지속적으로 증가하고 있는 고객"><span class="mark"></span><span class="txt">기업가치 또는 법인 자산이 지속적으로 증가하고 있는 고객</span></label>
         <label class="opt"><input type="checkbox" name="succession" value="대표자의 연령이 높아지고 있는 고객"><span class="mark"></span><span class="txt">대표자의 연령이 높아지고 있는 고객</span></label>
         <label class="opt"><input type="checkbox" name="succession" value="개인사업자로 가업을 10년 이상 영위한 고객"><span class="mark"></span><span class="txt">개인사업자로 가업을 10년 이상 영위한 고객</span></label>
+        <label class="opt none"><input type="checkbox" name="succession" value="해당 고객 없음" data-none><span class="mark"></span><span class="txt">해당되는 고객이 없음</span></label>
       </div>
 
       <h3>주식이동 · 자본거래 · 자사주 관련 <em class="req">*</em></h3>
@@ -225,6 +228,7 @@
         <label class="opt"><input type="checkbox" name="stock" value="가지급금을 해결해야 하는 고객"><span class="mark"></span><span class="txt">가지급금을 해결해야 하는 고객</span></label>
         <label class="opt"><input type="checkbox" name="stock" value="자기주식 처리를 고민하고 있는 고객"><span class="mark"></span><span class="txt">자기주식 처리를 고민하고 있는 고객</span></label>
         <label class="opt"><input type="checkbox" name="stock" value="차명주주 해결 또는 주식이동이 필요한 고객"><span class="mark"></span><span class="txt">차명주주 해결 또는 주식이동이 필요한 고객</span></label>
+        <label class="opt none"><input type="checkbox" name="stock" value="해당 고객 없음" data-none><span class="mark"></span><span class="txt">해당되는 고객이 없음</span></label>
       </div>
       <p class="err"></p>
       <div class="nav"><button type="button" class="btn-prev" data-prev>이전</button><button type="button" class="btn-next" data-next>다음</button></div>
@@ -324,6 +328,14 @@
   document.querySelectorAll('[data-next]').forEach(b => b.onclick = () => { if (validate()) show(cur + 1); });
   document.querySelectorAll('[data-prev]').forEach(b => b.onclick = () => { err(''); show(cur - 1); });
 
+  // '해당되는 고객이 없음'은 다른 항목과 함께 선택되지 않게
+  ['succession','stock'].forEach(n => {
+    const boxes = [...document.querySelectorAll(`input[name="${n}"]`)];
+    boxes.forEach(b => b.addEventListener('change', () => {
+      if (!b.checked) return;
+      boxes.forEach(o => { if (o !== b && (b.hasAttribute('data-none') || o.hasAttribute('data-none'))) o.checked = false; });
+    }));
+  });
   document.getElementById('f').addEventListener('input', () => err(''));
   document.getElementById('f').addEventListener('submit', e => e.preventDefault());
 
