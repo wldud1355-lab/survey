@@ -39,12 +39,15 @@
   h1{font-size:26px;line-height:1.35;font-weight:800;margin:10px 0 18px;letter-spacing:-.02em}
   .progress{height:6px;background:var(--line);border-radius:6px;overflow:hidden}
   .progress b{display:block;height:100%;width:0;background:linear-gradient(90deg,var(--yellow),var(--orange));transition:width .35s}
+  .h1-sep{color:#CFC6B2;font-weight:500;margin:0 2px}
   .progress-label{display:flex;justify-content:space-between;font-size:12px;color:var(--sub);margin:6px 0 22px}
 
   /* ── 카드 공통 ── */
   .step{display:none;background:var(--card);border:1px solid var(--line);border-radius:18px;padding:28px 24px;box-shadow:0 8px 24px rgba(30,34,48,.05)}
   .step.on{display:block;animation:fade .3s ease}
   @keyframes fade{from{opacity:0;transform:translateY(6px)}to{opacity:1;transform:none}}
+  .back-top{display:block;background:none;border:0;padding:0 0 14px;font-size:14px;font-weight:600;color:var(--sub);cursor:pointer}
+  .back-top:hover{color:var(--ink)}
   .tag{display:inline-block;font-size:12px;font-weight:800;color:var(--orange);background:#FFF0DE;border-radius:999px;padding:3px 10px;margin-bottom:10px}
   h2{font-size:21px;line-height:1.45;font-weight:800;letter-spacing:-.01em}
   .lead{color:var(--sub);margin-top:8px}
@@ -131,7 +134,8 @@
   .pre{font-size:15px;font-weight:500;color:var(--sub);margin-bottom:4px}
   .ccd-brief{margin-top:16px;padding-left:14px;border-left:3px solid #E4DAC6;font-size:14.5px;line-height:1.75;color:#6B675E}
   .ccd-brief b{color:var(--ink);font-weight:700}
-  .q3{margin:30px 0 14px;padding-top:26px;border-top:1px solid var(--line);font-size:21px;font-weight:800;line-height:1.45;letter-spacing:-.02em;color:var(--ink)}
+  .step3{margin-top:36px;padding-top:28px;border-top:1px solid var(--line)}
+  .q3{margin:4px 0 14px;font-size:21px;font-weight:800;line-height:1.45;letter-spacing:-.02em;color:var(--ink)}
   .q3 span{display:block;font-size:15px;color:#B5732A;margin-bottom:4px}
 
   /* ── YES/NO 카드 ── */
@@ -168,10 +172,10 @@
 <body>
 <div class="wrap">
   <div class="top">
-    <div class="brand"><i></i>내 고객 속 자사주, 가업승계 고객 찾기</div>
+    <div class="brand"><i></i>포스터를 붙였다면, 이제 고객을 찾아볼 차례</div>
     <span class="logo" role="img" aria-label="기업의별"></span>
   </div>
-  <h1>기업의별 1분 설문 이벤트</h1>
+  <h1>자사주·가업승계 대상 찾기 <span class="h1-sep">|</span> 1분 설문</h1>
   <div class="progress"><b id="bar"></b></div>
   <div class="progress-label"><span id="stepLabel">시작</span><span>약 1분 소요</span></div>
 
@@ -211,28 +215,28 @@
     </section>
 
     <!-- 1. STEP 1 -->
-    <section class="step" data-label="STEP 1 / 3">
+    <section class="step" data-label="1 / 2">
+      <button type="button" class="back-top" data-prev>← 이전</button>
       <span class="tag">STEP 1</span>
       <h2>세무사님, 이런 고객이 있으신가요?</h2>
       <p class="lead">아래 항목을 보면서 세무사님의 거래처 중 해당되는 고객을 확인해보세요.</p>
 
       <h3>가업승계 관련 <em class="req">*</em></h3>
       <div class="opts">
-        <label class="opt"><input type="checkbox" name="succession" value="장기간 사업을 운영하고 있는 고객"><span class="mark"></span><span class="txt">장기간 사업을 운영하고 있는 고객</span></label>
-        <label class="opt"><input type="checkbox" name="succession" value="자녀에게 사업을 승계할 가능성이 있는 고객"><span class="mark"></span><span class="txt">자녀에게 사업을 승계할 가능성이 있는 고객</span></label>
-        <label class="opt"><input type="checkbox" name="succession" value="가업승계에 대해 상담한 적이 있는 고객"><span class="mark"></span><span class="txt">가업승계에 대해 상담한 적이 있는 고객</span></label>
+        <label class="opt"><input type="checkbox" name="succession" value="자녀에게 사업을 승계할 가능성이 있는 고객(또는 자녀 재직 중)"><span class="mark"></span><span class="txt">자녀에게 사업을 승계할 가능성이 있는 고객(또는 자녀 재직 중)</span></label>
         <label class="opt"><input type="checkbox" name="succession" value="기업가치 또는 법인 자산이 지속적으로 증가하고 있는 고객"><span class="mark"></span><span class="txt">기업가치 또는 법인 자산이 지속적으로 증가하고 있는 고객</span></label>
-        <label class="opt"><input type="checkbox" name="succession" value="대표자의 연령이 높아지고 있는 고객"><span class="mark"></span><span class="txt">대표자의 연령이 높아지고 있는 고객</span></label>
+        <label class="opt"><input type="checkbox" name="succession" value="대표자의 연령이 60세 이상인 고객"><span class="mark"></span><span class="txt">대표자의 연령이 60세 이상인 고객</span></label>
+        <label class="opt"><input type="checkbox" name="succession" value="사업무관자산이 많은 고객"><span class="mark"></span><span class="txt">사업무관자산이 많은 고객</span></label>
         <label class="opt"><input type="checkbox" name="succession" value="개인사업자로 가업을 10년 이상 영위한 고객"><span class="mark"></span><span class="txt">개인사업자로 가업을 10년 이상 영위한 고객</span></label>
         <label class="opt none"><input type="checkbox" name="succession" value="해당 고객 없음" data-none><span class="mark"></span><span class="txt">해당되는 고객이 없음</span></label>
       </div>
 
       <h3>주식이동 · 자본거래 · 자사주 관련 <em class="req">*</em></h3>
       <div class="opts">
-        <label class="opt"><input type="checkbox" name="stock" value="법인이 자기주식을 보유하고 있는 고객"><span class="mark"></span><span class="txt">법인이 자기주식을 보유하고 있는 고객</span></label>
+        <label class="opt"><input type="checkbox" name="stock" value="법인이 자기주식을 보유하고 있는 고객(처리 고민)"><span class="mark"></span><span class="txt">법인이 자기주식을 보유하고 있는 고객(처리 고민)</span></label>
         <label class="opt"><input type="checkbox" name="stock" value="잉여금의 개인화를 고민하고 있는 고객"><span class="mark"></span><span class="txt">잉여금의 개인화를 고민하고 있는 고객</span></label>
         <label class="opt"><input type="checkbox" name="stock" value="가지급금을 해결해야 하는 고객"><span class="mark"></span><span class="txt">가지급금을 해결해야 하는 고객</span></label>
-        <label class="opt"><input type="checkbox" name="stock" value="자기주식 처리를 고민하고 있는 고객"><span class="mark"></span><span class="txt">자기주식 처리를 고민하고 있는 고객</span></label>
+        <label class="opt"><input type="checkbox" name="stock" value="가족에게 주식이 분산되어 있는 고객"><span class="mark"></span><span class="txt">가족에게 주식이 분산되어 있는 고객</span></label>
         <label class="opt"><input type="checkbox" name="stock" value="차명주주 해결 또는 주식이동이 필요한 고객"><span class="mark"></span><span class="txt">차명주주 해결 또는 주식이동이 필요한 고객</span></label>
         <label class="opt none"><input type="checkbox" name="stock" value="해당 고객 없음" data-none><span class="mark"></span><span class="txt">해당되는 고객이 없음</span></label>
       </div>
@@ -241,7 +245,8 @@
     </section>
 
     <!-- 2. STEP 2 -->
-    <section class="step" data-label="STEP 2 / 3">
+    <section class="step" data-label="2 / 2">
+      <button type="button" class="back-top" data-prev>← 이전</button>
       <span class="tag">STEP 2</span>
       <h2>세무사님의 핵심 고객을 지키기 위해</h2>
       <div class="alert">
@@ -251,29 +256,21 @@
       </div>
       <p class="q">소중한 고객을 지키고 컨설팅 기회를 만들어가기 위해<br>어떤 지원이 필요하신가요? <em class="req">*</em> <small>(중복 선택 가능)</small></p>
       <div class="opts">
+        <label class="opt"><input type="checkbox" name="needs" value="해당 고객에게 제안 또는 니즈 환기를 할 수 있는 자료"><span class="mark"></span><span class="txt">해당 고객에게 제안 또는 니즈 환기를 할 수 있는 자료</span></label>
         <label class="opt"><input type="checkbox" name="needs" value="고객에게 활용할 수 있는 자료 및 상담 Tool"><span class="mark"></span><span class="txt">고객에게 활용할 수 있는 자료 및 상담 Tool</span></label>
         <label class="opt"><input type="checkbox" name="needs" value="컨설팅 역량 강화를 위한 특별 교육"><span class="mark"></span><span class="txt">컨설팅 역량 강화를 위한 특별 교육</span></label>
         <label class="opt"><input type="checkbox" name="needs" value="실제 컨설팅 과정의 전문가팀 지원 및 동행"><span class="mark"></span><span class="txt">실제 컨설팅 과정의 전문가팀 지원 및 동행</span></label>
+        <label class="opt"><input type="checkbox" name="needs" value="나의 고객을 위한 소그룹 CEO 세미나"><span class="mark"></span><span class="txt">나의 고객을 위한 소그룹 CEO 세미나</span></label>
         <label class="opt"><input type="checkbox" id="otherChk"><span class="mark"></span><span class="txt">기타</span></label>
       </div>
       <input type="text" id="needsOther" class="other-input" placeholder="필요하신 지원을 자유롭게 적어주세요">
-      <p class="err"></p>
-      <div class="nav"><button type="button" class="btn-prev" data-prev>이전</button><button type="button" class="btn-next" data-next>다음</button></div>
-    </section>
-
-    <!-- 3. STEP 3 -->
-    <section class="step" data-label="STEP 3 / 3">
-      <span class="tag">STEP 3</span>
-      <p class="pre">고객에게 무엇을, 어떻게 제안해야 할지 고민된다면,</p>
-      <h2>기업의별 중앙컨설팅본부(CCD)가<br>함께합니다.</h2>
-      <p class="ccd-brief">고객의 상황을 살펴보고 고객을 위한 컨설팅 기회를 발견해, 소중한 고객을 보호하면서 필요한 제안으로 연결할 수 있도록 함께 방향을 찾아드립니다.</p>
-      <p class="q3"><span>Q.</span>CCD와 함께 검토해보시겠습니까? <em class="req">*</em></p>
-      <div class="yn">
-        <label class="opt"><input type="radio" name="consult" value="YES"><span class="mark"></span><span class="txt"><b>네, 함께 논의해보고 싶습니다.</b><small>고객 상황에 맞는 컨설팅 기회와 제안 방법을 함께 검토합니다.</small></span></label>
-        <label class="opt"><input type="radio" name="consult" value="NO"><span class="mark"></span><span class="txt"><b>지금은 검토가 필요한 고객이 없습니다.</b><small>필요한 고객이 생기면 언제든 함께 논의할 수 있습니다.</small></span></label>
-      </div>
-      <div class="contact" id="contact">
-        <div class="field"><label for="memo">검토가 필요한 고객 상황 <span style="color:var(--sub);font-weight:500">(선택)</span></label><textarea id="memo" placeholder="예) 제조업 법인, 대표 68세, 자녀 승계 고민 중"></textarea></div>
+      <div class="step3" id="step3">
+        <span class="tag">STEP 3</span>
+        <p class="q3"><span>Q.</span>고객에게 어떻게 제안하고 설득할지 함께 검토해볼까요? <em class="req">*</em></p>
+        <div class="yn">
+          <label class="opt"><input type="radio" name="consult" value="YES"><span class="mark"></span><span class="txt"><b>네, 함께 논의해보고 싶습니다.</b><small>고객의 상황을 살펴보고, 고객을 보호하면서 제안할 수 있도록 방향을 찾아드립니다.</small></span></label>
+          <label class="opt"><input type="radio" name="consult" value="NO"><span class="mark"></span><span class="txt"><b>지금은 검토가 필요한 고객이 없습니다.</b><small>필요한 고객이 생기면 언제든 함께 논의할 수 있습니다.</small></span></label>
+        </div>
       </div>
       <p class="err"></p>
       <div class="nav"><button type="button" class="btn-prev" data-prev>이전</button><button type="button" class="btn-next" id="submitBtn">제출하기</button></div>
@@ -324,9 +321,7 @@
       const other = document.getElementById('otherChk').checked;
       if (!vals('needs').length && !other) return err('필요하신 지원을 1개 이상 선택해 주세요.');
       if (other && !v('needsOther')) return err('기타 내용을 입력해 주세요.');
-    }
-    if (cur === 3){
-      if (!vals('consult')[0]) return err('응답을 선택해 주세요.');
+      if (!vals('consult')[0]) return err('STEP 3 응답을 선택해 주세요.');
     }
     return err('');
   }
@@ -348,8 +343,6 @@
   const otherChk = document.getElementById('otherChk'), otherInput = document.getElementById('needsOther');
   otherChk.onchange = () => { otherInput.classList.toggle('on', otherChk.checked); if (otherChk.checked) otherInput.focus(); };
 
-  document.querySelectorAll('input[name="consult"]').forEach(r => r.onchange = () =>
-    document.getElementById('contact').classList.toggle('on', r.value === 'YES' && r.checked));
 
   document.getElementById('submitBtn').onclick = () => {
     if (!validate()) return;
@@ -360,7 +353,7 @@
       name: v('name'), phone: v('phone'),
       succession: vals('succession'), stock: vals('stock'),
       needs: vals('needs'), needsOther: otherChk.checked ? v('needsOther') : '',
-      consult, memo: v('memo'), ref: REF,
+      consult, memo: '', ref: REF,
     };
     const fail = msg => {
       btn.disabled = false; btn.textContent = '제출하기';
